@@ -1,6 +1,6 @@
 import asyncHandler from "../service/asyncHandler";
 import CustomError from "../utils/CustomError";
-import userSchema from "../models/user.schema";
+import User from "../models/user.schema";
 
 export const signUp = asyncHandler(async(req ,res) => {
     const{name, email, password} = req.body
@@ -9,4 +9,24 @@ export const signUp = asyncHandler(async(req ,res) => {
         throw new CustomError("please add all fields", 400)
     }
 
+    const existingUser = await User.findOne({email})
+
+    if(existingUser){
+        throw new CustomError("User already exists", 400) 
+    }
+
+    const user = await User.create({
+        name,
+        email,
+        password
+    })
+
+    const token = user.getJWTtoken()
+    user.password = undefined
+
+    res.status(200).json({
+        success: true,
+        token,
+        user
+    })
 })
