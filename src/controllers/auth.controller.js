@@ -1,6 +1,8 @@
 import asyncHandler from "../service/asyncHandler";
 import CustomError from "../utils/CustomError";
 import User from "../models/user.schema";
+import mailHelper from "../utils/mailHelper.js"
+
 
 export const signUp = asyncHandler(async(req ,res) => {
     const{name, email, password} = req.body

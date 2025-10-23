@@ -1,4 +1,4 @@
-import aws from "";
+import aws from "aws-sdk";
 import config from "./index.js"
 
 const S3 = new aws.S3({
@@ -8,3 +8,4 @@ const S3 = new aws.S3({
 })
 
 export default S3;
+
