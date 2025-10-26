@@ -1,6 +1,6 @@
-import asyncHandler from "../service/asyncHandler";
-import CustomError from "../utils/CustomError";
-import User from "../models/user.schema";
+import asyncHandler from "../service/asyncHandler.js";
+import CustomError from "../utils/customError.js";
+import User from "../models/user.schema.js";
 import mailHelper from "../utils/mailHelper.js"
 
 
@@ -45,3 +45,5 @@ export const getProfile = asyncHandler(async(req,res)=>{
         user
     })
 })
+
+//getProfile, login, logout, signUp, forgotPassword, resetPassword 

@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { createCollection, deleteCollection, getAllCollections, updateCollection } from "../controllers/collection.controller.js";
-import {  isLoggedIn, authorize } from "../middlewares/auth.middleware";
+import { createCollection, deleteCollection, getAllcollection, updateCollection } from "../controllers/collection.controller.js";
+import {  isLoggedIn, authorize } from "../middlewares/auth.middleware.js";
 import AuthRoles from "../utils/authRoles.js";
 
 
@@ -15,7 +15,7 @@ router.put("/:id", isLoggedIn, authorize(AuthRoles.ADMIN), updateCollection)
 router.delete("/:id", isLoggedIn, authorize(AuthRoles.ADMIN), deleteCollection)
 
 //get all collection
-router.get("/",  getAllCollections)
+router.get("/",  getAllcollection)
 
 export default router;
 

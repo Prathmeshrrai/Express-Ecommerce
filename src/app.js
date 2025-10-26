@@ -15,11 +15,17 @@ app.get("/", (_req,res)=>{
     res.send("Hello there prathmesh-API")
 })
 
-app.all("*",(_req, res)=>{
-    return res.status(400).json({
-        success: false,
-        message : "Route not found"
-    })
+app.use((_req, res) => {
+  return res.status(400).json({
+    success: false,
+    message: "Route not found",
+  });
+
+// app.all("*",(_req, res)=>{
+//     return res.status(400).json({
+//         success: false,
+//         message : "Route not found"
+//     })
 })
 
 export default app;
