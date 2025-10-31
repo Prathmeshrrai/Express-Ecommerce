@@ -2,10 +2,6 @@ import cookieParser from "cookie-parser";
 import express from "express";
 import routes from "./Routes/index.js";
 import cors from "cors";
-import dotenv from "dotenv";
-
-dotenv.config();
-console.log("Loaded PORT:", process.env.PORT);
 
 const app = express()
 const PORT = process.env.PORT || 5000;
@@ -18,7 +14,7 @@ app.use(cookieParser())
 
 app.use("/api/v1/", routes)
 
-app.get("/", (_req,res)=>{
+app.get("/", (_req, res)=>{
     res.send("Hello there prathmesh-API");
 });
 
@@ -33,3 +29,12 @@ app.use((_req, res) => {
 app.listen(PORT, () => {
   console.log(`🚀 Server is running on http://localhost:${PORT}`);
 });
+
+export default app;
+
+
+
+/*
+// http://localhost:4000/api/v1/auth/login
+// http://localhost:4000/api/v1/auth/logout
+*/
