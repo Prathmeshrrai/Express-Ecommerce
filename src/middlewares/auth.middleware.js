@@ -2,12 +2,12 @@ import User from "../models/user.schema.js";
 import JWT from "jsonwebtoken";
 import asyncHandler from "../service/asyncHandler.js";
 import config from "../config/index.js";
-import CustomError from "../utils/CustomError.js";
+import CustomError from "../utils/customError.js";
 
 export const isLoggedIn = asyncHandler(async(req,res,next)=>{
     let token;
 
-    if(req.cookies.token(req.headers.authorization && req.headers.authorization.startswith("Bearer"))){
+    if(req.cookies.token || (req.headers.authorization && req.headers.authorization.startsWith("Bearer"))) {
         token = req.cookies.token || req.headers.authorization.split(" ")[1]
     }
 

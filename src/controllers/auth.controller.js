@@ -23,7 +23,9 @@ export const signUp = asyncHandler(async(req ,res) => {
         password
     })
 
-    const token = user.getJWTtoken()
+    const token = user.getJWTt
+    
+    oken()
     user.password = undefined
 
     res.status(200).json({
