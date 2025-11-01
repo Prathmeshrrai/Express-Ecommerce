@@ -3,9 +3,6 @@ import { createCollection, deleteCollection, getAllcollection, updateCollection 
 import {  isLoggedIn, authorize } from "../middlewares/auth.middleware.js";
 import AuthRoles from "../utils/authRoles.js";
 
-
-
-
 const router = Router()
 
 router.post("/", isLoggedIn, authorize(AuthRoles.ADMIN), createCollection)

@@ -1,6 +1,6 @@
 import Collection from "mongoose";
 import asyncHandler from "../service/asyncHandler.js";
-import CustomError from "../utils/CustomError.js";
+import CustomError from "../utils/customError.js";
 
 export const createCollection = asyncHandler(async(req,res)=>{
     const {name} = req.body
@@ -61,9 +61,14 @@ export const deleteCollection = asyncHandler(async(req,res)=>{
 })
 
 export const getAllcollection = asyncHandler(async(req,res)=>{
-    collection = collectionfind({})
+    const collection = await Collection.find()
 
     if(!collection){
-        throw new CustomError("collection is not available", 400)
+        throw new CustomError("collection is not available", 404)
     }
+
+    res.status(200).json({
+      success: true,
+      collection,
+    });
 })
