@@ -31,10 +31,3 @@ app.listen(PORT, () => {
 });
 
 export default app;
-
-
-
-/*
-// http://localhost:4000/api/v1/auth/login
-// http://localhost:4000/api/v1/auth/logout
-*/

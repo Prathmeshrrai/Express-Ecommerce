@@ -23,6 +23,14 @@ export const signUp = asyncHandler(async(req ,res) => {
         email,
         password
     })
+    
+    const cookieOptions = {
+    expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000), // 3 days
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "strict"
+    };
+
 
     const token = user.getJWTtoken()
     user.password = undefined
@@ -44,7 +52,7 @@ export const login = asyncHandler(async (req, res) => {
         throw new CustomError("PLease fill all details", 400)
     }
 
-    const user = User.findOne({email}).select("+password")
+    const user = await User.findOne({email}).select("+password")
 
     if (!user) {
         throw new CustomError("Invalid credentials", 400)

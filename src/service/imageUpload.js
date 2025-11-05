@@ -1,18 +1,59 @@
-import S3 from "../config/S3.config";
+// src/service/imageUpload.js
+import supabase from "../config/supabaseClient.js";
+import fs from "fs";
 
-export const S3FileUpload = async ({bucketName, key, body, contentType})=>{
-    return await S3.upload({
-        Bucket: bucketName,
-        key: key,
-        Body: body,
-        ContentType : contentType
-    }).promise()
-}
+/**
+ * Upload a file to Supabase Storage
+ * @param {Object} params - Upload parameters
+ * @param {string} params.bucketName - Supabase storage bucket name
+ * @param {string} params.key - File path/key in the bucket
+ * @param {string} params.filePath - Local path to the file
+ * @param {string} params.contentType - MIME type of the file
+ */
+export const supabaseFileUpload = async ({ bucketName, key, filePath, contentType }) => {
+  try {
+    const fileBuffer = fs.readFileSync(filePath);
 
-export const S3deleteFile = async ({bucketName, key}) =>{
-    return await S3.deleteObject({
-        Bucket: bucketName,
-        Key: key,
-    })
-    .promise()
-}
+    const { data, error } = await supabase.storage
+      .from(bucketName)
+      .upload(key, fileBuffer, {
+        contentType,
+        upsert: true,
+      });
+
+    if (error) {
+      throw new Error("Upload failed: " + error.message);
+    }
+
+    // Get the public URL
+    const { data: publicUrlData } = supabase.storage
+      .from(bucketName)
+      .getPublicUrl(key);
+
+    return {
+      secure_url: publicUrlData.publicUrl,
+    };
+  } catch (err) {
+    console.error("❌ Error uploading file:", err.message);
+    throw err;
+  }
+};
+
+/**
+ * Delete a file from Supabase Storage
+ * @param {Object} params - Delete parameters
+ * @param {string} params.bucketName - Supabase storage bucket name
+ * @param {string} params.key - File path/key to delete
+ */
+export const supabaseDeleteFile = async ({ bucketName, key }) => {
+  try {
+    const { error } = await supabase.storage.from(bucketName).remove([key]);
+    if (error) {
+      throw new Error("Delete failed: " + error.message);
+    }
+    return true;
+  } catch (err) {
+    console.error("❌ Error deleting file:", err.message);
+    throw err;
+  }
+};
