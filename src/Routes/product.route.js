@@ -5,6 +5,7 @@ import {
   getProductById,
   updateProduct,
   deleteProduct,
+  getProductByCollectionId,
 } from "../controllers/product.controller.js";
 
 import { isLoggedIn, authorize } from "../middlewares/auth.middleware.js";
@@ -17,6 +18,8 @@ router.post("/add", isLoggedIn, authorize(AuthRoles.ADMIN), addProduct);
 
 // 📦 Get all products
 router.get("/", getAllProducts);
+
+router.get("/collection/:id", getProductByCollectionId);
 
 // 🔍 Get single product
 router.get("/:id", getProductById);

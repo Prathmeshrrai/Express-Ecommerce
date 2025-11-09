@@ -1,8 +1,16 @@
-// signup a new user
 import asyncHandler from "../service/asyncHandler.js";
 import CustomError from "../utils/customError.js";
 import User from "../models/user.schema.js";
 import mailHelper from "../utils/mailHelper.js"
+import crypto from "crypto";
+
+export const cookieOptions = {
+  expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000), // 3 days
+  httpOnly: true,
+  //secure: process.env.NODE_ENV === "production",
+  secure: false,
+  sameSite: "lax"
+};
 
 
 export const signUp = asyncHandler(async(req ,res) => {
@@ -23,14 +31,6 @@ export const signUp = asyncHandler(async(req ,res) => {
         email,
         password
     })
-    
-    const cookieOptions = {
-    expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000), // 3 days
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "strict"
-    };
-
 
     const token = user.getJWTtoken()
     user.password = undefined

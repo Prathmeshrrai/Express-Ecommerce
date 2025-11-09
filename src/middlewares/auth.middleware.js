@@ -16,17 +16,21 @@ export const isLoggedIn = asyncHandler(async(req,res,next)=>{
     }
 
     try{
-        JWT.verify(token,config.JWT_SECRET)
-        req.user = await User.findById(decodedJWTPayload._id, "name email role")
+        const decoded = JWT.verify(token, config.JWT_SECRET);
+        req.user = await User.findById(decoded._id).select("name email role")
         next()
     }catch(error){
         throw new CustomError("Not authorized to access this resource",401)
     }
 })
 
-export const authorize = (...requiredRoles) =>asyncHandler(async(req,res,next)=>{
+export const authorize = (...requiredRoles) =>
+    asyncHandler(async(req,res,next)=>{
     if(!requiredRoles.includes(req.user.role)){
-        throw new CustomError("you are not authorized to authorized to access this resource ")
+        throw new CustomError(
+            "you are not authorized to authorized to access this resource",
+            403
+        )
     }
     next()
 })

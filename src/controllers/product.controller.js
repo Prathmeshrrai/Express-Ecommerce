@@ -19,7 +19,16 @@ export const addProduct = asyncHandler(async (req, res) => {
     });
   });
 
-  const { name, price, description, collectionId } = fields;
+  //const { name, price, description, collectionId } = fields;
+
+  // Convert array fields into single values
+const safeField = (f) => Array.isArray(f) ? f[0] : f;
+
+const name = safeField(fields.name);
+const price = safeField(fields.price);
+const description = safeField(fields.description);
+const collectionId = safeField(fields.collectionId);
+
 
   if (!name || !price || !description || !collectionId) {
     throw new CustomError("Please fill all required fields", 400);

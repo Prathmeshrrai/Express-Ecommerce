@@ -1,4 +1,4 @@
-import Collection from "mongoose";
+import Collection from "../models/collection.schema.js"
 import asyncHandler from "../service/asyncHandler.js";
 import CustomError from "../utils/customError.js";
 
@@ -42,7 +42,7 @@ export const updateCollection = asyncHandler(async(req,res)=>{
 
     res.status(200).json({
         message:"Collection updated successfully",
-        updateCollection
+        updatedCollection
     })
 })
 
@@ -52,11 +52,15 @@ export const deleteCollection = asyncHandler(async(req,res)=>{
     const collectionToDelete = await Collection.findById(collectionId)
 
     if(!collectionToDelete){
-        throw new CustomError("collection is not deleted", 400)
+        throw new CustomError("collection is not deleted", 404)
     }  
 
     await collectionToDelete.remove()
 
+    res.status(200).json({
+    success: true,
+    message: "Collection deleted successfully"
+})
 
 })
 
