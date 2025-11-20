@@ -76,4 +76,8 @@ if (!process.env.VERCEL) {
   app.listen(PORT, () => console.log(`Server running locally on port ${PORT}`));
 }
 
+app.get("/", (req, res) => {
+  res.send("API is running...");
+});
+
 export default app;
