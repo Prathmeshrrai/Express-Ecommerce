@@ -1,16 +1,44 @@
+// import { Router } from "express";
+// import { getProfile, signUp, login, logout, forgotPassword, resetPassword } from "../controllers/auth.controller.js";
+// import {  isLoggedIn } from "../middlewares/auth.middleware.js";
+
+// const router = Router ()
+
+// router.post("/signup", signUp)
+
+// router.post("/login", login)
+// router.get("/logout", logout)
+
+// router.post("/password/forgot/", forgotPassword)
+// router.post("/password/reset/:token", resetPassword)
+// router.get("/profile", isLoggedIn, getProfile)
+
+// export default router;
+
 import { Router } from "express";
-import { getProfile, signUp, login, logout, forgotPassword, resetPassword } from "../controllers/auth.controller.js";
-import {  isLoggedIn } from "../middlewares/auth.middleware.js";
+import { 
+  getProfile, 
+  signUp, 
+  login, 
+  logout, 
+  forgotPassword, 
+  resetPassword 
+} from "../controllers/auth.controller.js";
 
-const router = Router ()
+import { isLoggedIn } from "../middlewares/auth.middleware.js";
 
-router.post("/signup", signUp)
+const router = Router();
 
-router.post("/login", login)
-router.get("/logout", logout)
+// Auth Routes
+router.post("/signup", signUp);
+router.post("/login", login);
+router.get("/logout", logout);
 
-router.post("/password/forgot/", forgotPassword)
-router.post("/password/reset/:token", resetPassword)
-router.get("/profile", isLoggedIn, getProfile)
+// Password Routes
+router.post("/password/forgot", forgotPassword);
+router.post("/password/reset/:token", resetPassword);
+
+// Protected Route
+router.get("/profile", isLoggedIn, getProfile);
 
 export default router;

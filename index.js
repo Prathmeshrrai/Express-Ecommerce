@@ -1,83 +1,97 @@
-// // import mongoose from "mongoose";
-// // import app from "./src/app.js";
-// // import config from "./src/config/index.js";
+import dotenv from "dotenv";
+import app from "./src/app.js";
 
-// // ( async()=>{
-// //     try{
-// //         //console.log("Trying to connect:", config.MONGODB_URL);
-// //         await mongoose.connect(config.MONGODB_URL)
-// //         console.log("Database Connected!!!")
+dotenv.config();
 
-// //         app.on('error', (err)=>{
-// //             console.error("ERROR: ", err);
-// //             throw err
-// //         })
+const PORT = process.env.PORT || 5000;
 
-// //         const onListening = () =>{
-// //             console.log(`Listening on port ${config.PORT}`);
-// //         }
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on port ${PORT}`);
+});
 
-// //         app.listen(config.PORT, onListening)
-
-// //     }catch(err){
-// //         //console.error("❌ Mongoose connection error:", err.message);
-// //         console.error("ERROR: ",err)
-// //         throw err
-// //     }
-// // })();
 
 // import express from "express";
 // import cors from "cors";
+// import cookieParser from "cookie-parser";
 // import dotenv from "dotenv";
+// import router from "./src/Routes/index.js";
 
 // dotenv.config();
 
 // const app = express();
 
-// app.use(cors());
 // app.use(express.json());
+// app.use(express.urlencoded({ extended: true }));
 
-// // your existing routes
-// import router from "./src/Routes/index.js";
+// app.use(cors({
+//   origin: true,
+//   credentials: true
+// }));
+
+// app.use(cookieParser());
+
 // app.use("/api", router);
 
-// // Only start local server when NOT running on Vercel
-// if (!process.env.VERCEL) {
-//   const PORT = process.env.PORT || 3000;
-//   app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-// }
+// // Test route
+// app.get("/", (req, res) => {
+//   res.send("Hello from Render API");
+// });
+
+// // 404
+// app.use((_req, res) => {
+//   return res.status(404).json({
+//     success: false,
+//     message: "Route not found"
+//   });
+// });
+
+// const PORT = process.env.PORT || 5000;
+// app.listen(PORT, () => {
+//   console.log(`🚀 Server running on port ${PORT}`);
+// });
 
 // export default app;
 
 
-import express from "express";
-import cors from "cors";
-import dotenv from "dotenv";
+// // // import "module-alias/register.js";
+// // // import app from "./src/app.js";
+// // // import express from "express";
+// // // import cors from "cors";
+// // // import dotenv from "dotenv";
 
-dotenv.config();
+// // // dotenv.config();
 
-const app = express();
+// // // const app = express();
 
-app.use(cors());
-app.use(express.json());
+// // // app.use(cors());
+// // // app.use(express.json());
 
-// your existing routes
-import router from "./src/Routes/index.js";
-app.use("/api", router);
+// // // // your existing routes
+// // // import router from "./src/Routes/index.js";
+// // // app.use("/api", router);
 
-// ✅ REMOVE local server listen completely for Vercel
-// ❗ Do NOT run app.listen() on Vercel
-// Vercel will import this file inside api/index.js
-// and handle requests automatically
+// // // if (!process.env.VERCEL) {
+// // //   const PORT = process.env.PORT || 3000;
+// // //   app.listen(PORT, () => console.log(`Server running locally on port ${PORT}`));
+// // // }
 
-// Only start local server when running on localhost (not Vercel)
-if (!process.env.VERCEL) {
-  const PORT = process.env.PORT || 3000;
-  app.listen(PORT, () => console.log(`Server running locally on port ${PORT}`));
-}
+// // // app.get("/", (req, res) => {
+// // //   res.send("API is running...");
+// // // });
 
-app.get("/", (req, res) => {
-  res.send("API is running...");
-});
+// // // export default app;
 
-export default app;
+
+// // import "module-alias/register.js";
+// // import app from "./src/app.js";
+
+// // // Vercel requires *ONLY export*, no listen
+// // export default app;
+
+// // // Local development only
+// // if (!process.env.VERCEL) {
+// //   const PORT = process.env.PORT || 5000;
+// //   app.listen(PORT, () => {
+// //     console.log(`🚀 Server running locally on port ${PORT}`);
+// //   });
+// // }
