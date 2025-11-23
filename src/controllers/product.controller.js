@@ -2,7 +2,7 @@ import Product from "../models/product.schema.js";
 import formidable from "formidable";
 import { supabaseFileUpload, supabaseDeleteFile } from "../service/imageUpload.js";
 import mongoose from "mongoose";
-import CustomError from "../../utils/customError.js";
+import CustomError from "../utils/customError.js";
 import asyncHandler from "../service/asyncHandler.js";
 import config from "../config/index.js";
 import fs from "fs";

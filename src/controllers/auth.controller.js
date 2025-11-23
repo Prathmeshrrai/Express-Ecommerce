@@ -1,5 +1,5 @@
 import asyncHandler from "../service/asyncHandler.js";
-import CustomError from "../../utils/customError.js";
+import CustomError from "../utils/customError.js";
 import User from "../models/user.schema.js";
 import mailHelper from "../utils/mailHelper.js"
 import crypto from "crypto";
