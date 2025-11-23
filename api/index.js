@@ -3,6 +3,6 @@
 // export default function handler(req, res) {
 //   return app(req, res);
 // }
-import app from "../index.js"; 
+import app from "../src/index.js"; 
 
 export default app;
