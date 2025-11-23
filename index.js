@@ -1,19 +1,24 @@
+import express from "express";
 import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
 
 dotenv.config();
 
+// Fix __dirname for ES Modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-import app from path.join(__dirname, "src/app.js");
+// Import your app
+import app from "./src/app.js";
 
+// Start server
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });
+
 
 
 // import dotenv from "dotenv";
