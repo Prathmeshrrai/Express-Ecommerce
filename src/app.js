@@ -21,6 +21,15 @@ app.get("/", (req, res) => {
   res.send("Hello from Render API");
 });
 
+app.get("/debug-paths", (req, res) => {
+  res.json({
+    cwd: process.cwd(),
+    filename: __filename,
+    dirname: __dirname,
+  });
+});
+
+
 export default app;
 
 
