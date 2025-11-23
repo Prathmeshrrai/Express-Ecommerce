@@ -1,13 +1,31 @@
 import dotenv from "dotenv";
-import app from "./src/app.js";
+import path from "path";
+import { fileURLToPath } from "url";
 
 dotenv.config();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+import app from path.join(__dirname, "src/app.js");
 
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
 });
+
+
+// import dotenv from "dotenv";
+// import app from "./src/app.js";
+
+// dotenv.config();
+
+// const PORT = process.env.PORT || 5000;
+
+// app.listen(PORT, () => {
+//   console.log(`🚀 Server running on port ${PORT}`);
+// });
 
 
 // import express from "express";
