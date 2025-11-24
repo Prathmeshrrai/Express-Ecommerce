@@ -2,6 +2,8 @@ import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import router from "./Routes/index.js";
+import { sendEmail } from "./utils/mailHelper.js";
+
 
 const app = express();
 
@@ -23,6 +25,21 @@ app.use("/api", router);
 app.get("/", (req, res) => {
   res.send("Hello from Render API");
 });
+
+app.get("/test-email", async (req, res) => {
+  try {
+    await sendEmail(
+      "raiprathmesh71@gmail.com",
+      "Test Email",
+      "<h1>Resend Working!</h1><p>This is a test email.</p>"
+    );
+
+    res.json({ success: true, message: "Email sent via Resend!" });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
 
 // 404 handler
 app.use((_req, res) => {
