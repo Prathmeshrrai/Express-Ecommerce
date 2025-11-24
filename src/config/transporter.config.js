@@ -1,34 +1,42 @@
-import nodemailer from "nodemailer"
+import { Resend } from "resend";
+import dotenv from "dotenv";
 
-import config from "./index.js"
+dotenv.config();
 
-const transporter = nodemailer.createTransport({
-    host: config.SMTP_MAIL_HOST,
-    port: config.SMTP_MAIL_PORT,
-    // secure: false, // true for 465, false for other ports
-    auth: {
-      user: config.SMTP_MAIL_USERNAME, // generated ethereal user
-      pass: config.SMTP_MAIL_PASSWORD, // generated ethereal password
-    },
-})
+export const resend = new Resend(process.env.RESEND_API_KEY);
 
 
-const sendTestEmail = async () => {
-  try {
-    const info = await transporter.sendMail({
-      from: process.env.SMTP_SENDER_EMAIL,
-      to: "test@example.com", 
-      subject: "Test Email from Node.js via Mailtrap",
-      text: "Hello! This is a test email from Mailtrap sandbox.",
-      html: "<h3>Hello!</h3><p>This is a test email from Mailtrap sandbox.</p>"
-    });
+// import nodemailer from "nodemailer"
 
-    console.log("Email sent! Message ID:", info.messageId);
-  } catch (error) {
-    console.error("Error sending email:", error);
-  }
-};
+// import config from "./index.js"
 
-sendTestEmail();
+// const transporter = nodemailer.createTransport({
+//     host: config.SMTP_MAIL_HOST,
+//     port: config.SMTP_MAIL_PORT,
+//     // secure: false, // true for 465, false for other ports
+//     auth: {
+//       user: config.SMTP_MAIL_USERNAME, // generated ethereal user
+//       pass: config.SMTP_MAIL_PASSWORD, // generated ethereal password
+//     },
+// })
 
-export default transporter;
+
+// const sendTestEmail = async () => {
+//   try {
+//     const info = await transporter.sendMail({
+//       from: process.env.SMTP_SENDER_EMAIL,
+//       to: "test@example.com", 
+//       subject: "Test Email from Node.js via Mailtrap",
+//       text: "Hello! This is a test email from Mailtrap sandbox.",
+//       html: "<h3>Hello!</h3><p>This is a test email from Mailtrap sandbox.</p>"
+//     });
+
+//     console.log("Email sent! Message ID:", info.messageId);
+//   } catch (error) {
+//     console.error("Error sending email:", error);
+//   }
+// };
+
+// sendTestEmail();
+
+// export default transporter;

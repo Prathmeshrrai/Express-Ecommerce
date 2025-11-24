@@ -1,7 +1,7 @@
 import asyncHandler from "../service/asyncHandler.js";
 import CustomError from "../utils/customError.js";
 import User from "../models/user.schema.js";
-import mailHelper from "../utils/mailHelper.js"
+import { sendEmail } from "../utils/mailHelper.js"
 import crypto from "crypto";
 
 export const cookieOptions = {
@@ -120,11 +120,16 @@ export const forgotPassword = asyncHandler(async (req, res) => {
 
     try {
         // const options = {}
-        await mailHelper({
-            email: user.email,
-            subject: "Password reset mail",
-            message
-        })
+        // await mailHelper({
+        //     email: user.email,
+        //     subject: "Password reset mail",
+        //     message
+        // })
+        await sendEmail(
+        user.email,
+        "Your OTP",
+        `<h1>Your OTP is: ${otp}</h1>`
+        );
     } catch (error) {
         user.forgotPasswordToken = undefined
         user.forgotPasswordExpiry = undefined
