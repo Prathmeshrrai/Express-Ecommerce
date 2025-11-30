@@ -3,6 +3,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import router from "./routes/index.js";
 import { sendEmail } from "./utils/mailHelper.js";
+import authRoutes from "./routes/auth.route.js";
 
 
 const app = express();
@@ -20,6 +21,7 @@ app.use(cookieParser());
 
 // API routes
 app.use("/api", router);
+
 
 // Test route
 app.get("/", (req, res) => {

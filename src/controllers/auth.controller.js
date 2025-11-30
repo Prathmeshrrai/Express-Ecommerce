@@ -119,17 +119,23 @@ export const forgotPassword = asyncHandler(async (req, res) => {
     const message = `Your password reset token is as follows \n\n ${resetUrl} \n\n if this was not requested by you, please ignore.`
 
     try {
+        await sendEmail(
+        user.email,
+        "Password Reset Link",
+        `<p>Your password reset link:</p><a href="${resetUrl}">${resetUrl}</a>`
+        );
+
         // const options = {}
         // await mailHelper({
         //     email: user.email,
         //     subject: "Password reset mail",
         //     message
         // })
-        await sendEmail(
-        user.email,
-        "Your OTP",
-        `<h1>Your OTP is: ${otp}</h1>`
-        );
+        // await sendEmail(
+        // user.email,
+        // "Your OTP",
+        // `<h1>Your OTP is: ${otp}</h1>`
+        // );
     } catch (error) {
         user.forgotPasswordToken = undefined
         user.forgotPasswordExpiry = undefined
