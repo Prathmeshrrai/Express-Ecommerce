@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import router from "./Routes/index.js";
+import router from "./routes/index.js";
 import { sendEmail } from "./utils/mailHelper.js";
 
 
