@@ -13,6 +13,6 @@ router.use("/coupon", couponRoutes);
 router.use("/collection", collectionRoutes);
 router.use("/product", productRoutes);
 
-router.use(emailTestRoutes);
+router.use("/email", emailTestRoutes);
 
 export default router;
