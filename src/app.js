@@ -22,6 +22,8 @@ app.use(cookieParser());
 // API routes
 app.use("/api", router);
 
+app.use("/api/auth", authRoutes);
+
 
 // Test route
 app.get("/", (req, res) => {
