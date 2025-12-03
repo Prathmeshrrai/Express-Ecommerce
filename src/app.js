@@ -1,5 +1,5 @@
 import express from "express";
-import connectDB from "./db/connectDB.js";
+import connectDB from "./db/connectDb.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import router from "./routes/index.js";
