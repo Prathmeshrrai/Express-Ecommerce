@@ -1,4 +1,5 @@
 import express from "express";
+import connectDB from "./db/connectDB.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import router from "./routes/index.js";
@@ -19,10 +20,12 @@ app.use(cors({
 
 app.use(cookieParser());
 
+connectDB();
+
 // API routes
 app.use("/api", router);
 
-app.use("/api/auth", authRoutes);
+//app.use("/api/auth", authRoutes);
 
 
 // Test route
